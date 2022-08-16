@@ -113,13 +113,9 @@ def test_render_xy_plot():
         "country_code": "Country Code"
     }
 
-    render_xy_plot(gdpinfo, [], "/Users/chengnicole/Downloads/isp_gdp_xy_none.svg")
-    render_xy_plot(gdpinfo, ["China"], "/Users/chengnicole/Downloads/isp_gdp_xy_china.svg")
+    render_xy_plot(gdpinfo, [], "isp_gdp_xy_none.svg")
+    render_xy_plot(gdpinfo, ["China"], "isp_gdp_xy_china.svg")
     render_xy_plot(gdpinfo, ["United Kingdom", "United States"],
-                   "/Users/chengnicole/Downloads/isp_gdp_xy_uk+usa.svg")
-
-
-# Make sure the following call to test_render_xy_plot is commented out
-# when submitting to OwlTest/CourseraTest.
+                   "isp_gdp_xy_uk+usa.svg")
 
 test_render_xy_plot()
