@@ -76,3 +76,50 @@ def build_plot_dict(gdpinfo, country_list):
             filter_dict=dict(e for i, e in enumerate(country_dict[country].items()) if i>=4)
             country_gdp[country]=build_plot_values(gdpinfo,filter_dict)
     return country_gdp
+def render_xy_plot(gdpinfo, country_list, plot_file):
+    """
+    Inputs:
+      gdpinfo      - GDP data information dictionary
+      country_list - List of strings that are country names
+      plot_file    - String that is the output plot file name
+
+    Output:
+      Returns None.
+
+    Action:
+      Creates an SVG image of an XY plot for the GDP data
+      specified by gdpinfo for the countries in country_list.
+      The image will be stored in a file named by plot_file.
+    """
+    xy_chart = pygal.XY()
+    xy_chart.title ="Plot of GDP for select countries spanning 1960 to 2015"
+    for country in country_list:
+        xy_chart.add(country,build_plot_dict(gdpinfo, country_list)[country])
+    xy_chart.render_to_file(plot_file)
+
+
+def test_render_xy_plot():
+    """
+    Code to exercise render_xy_plot and generate plots from
+    actual GDP data.
+    """
+    gdpinfo = {
+        "gdpfile": "isp_gdp.csv",
+        "separator": ",",
+        "quote": '"',
+        "min_year": 1960,
+        "max_year": 2015,
+        "country_name": "Country Name",
+        "country_code": "Country Code"
+    }
+
+    render_xy_plot(gdpinfo, [], "/Users/chengnicole/Downloads/isp_gdp_xy_none.svg")
+    render_xy_plot(gdpinfo, ["China"], "/Users/chengnicole/Downloads/isp_gdp_xy_china.svg")
+    render_xy_plot(gdpinfo, ["United Kingdom", "United States"],
+                   "/Users/chengnicole/Downloads/isp_gdp_xy_uk+usa.svg")
+
+
+# Make sure the following call to test_render_xy_plot is commented out
+# when submitting to OwlTest/CourseraTest.
+
+test_render_xy_plot()
